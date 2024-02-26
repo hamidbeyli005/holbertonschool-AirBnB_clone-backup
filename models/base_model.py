@@ -27,7 +27,7 @@ class BaseModel:
 
     def __str__(self):
         """Str method"""
-        return f'[{type(self).__name__}] {self.id} {self.__dict__}'
+        return f'[{type(self).__name__}] ({self.id}) {self.__dict__}'
 
     def save(self):
         """ Update the update_at """
