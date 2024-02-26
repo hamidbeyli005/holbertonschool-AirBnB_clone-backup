@@ -11,12 +11,13 @@ class BaseModel:
     """Base class"""
     def __init__(self, *args, **kwargs):
         """Base class constructor"""
+        time_format = '%Y-%m-%dT%H:%M:%S.%f'
         if kwargs:
             for key, value in kwargs.items():
                 if key == '__class__':
                     continue
                 elif key == "created_at" or key == "updated_at":
-                    setattr(self, key, datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f'))
+                    setattr(self, key, datetime.strptime(value, time_format))
                 else:
                     setattr(self, key, value)
         else:
@@ -32,7 +33,7 @@ class BaseModel:
     def save(self):
         """ Update the update_at """
         self.updated_at = datetime.now()
-        models.storage.save()
+        # models.storage.save()
 
     def to_dict(self):
         """ Returns a dictionary """
