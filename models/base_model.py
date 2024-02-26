@@ -13,23 +13,17 @@ class BaseModel:
         """Base class constructor"""
         if kwargs:
             for key, value in kwargs.items():
-                if key == "id":
-                    self.id = kwargs.get(key)
-                if key == "created_at":
-                    self.created_at = datetime.strptime(kwargs.get(key),
-                                                        '%Y-%m-%dT%H:%M:%S.%f')
-                if key == "updated_at":
-                    self.updated_at = datetime.strptime(kwargs.get(key),
-                                                        '%Y-%m-%dT%H:%M:%S.%f')
-                if key == "my_number":
-                    self.my_number = kwargs.get(key)
-                if key == "name":
-                    self.name = kwargs.get(key)
+                if key == '__class__':
+                    continue
+                elif key == "created_at" or key == "updated_at":
+                    setattr(self, key, datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f'))
+                else:
+                    setattr(self, key, value)
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
-            models.storage.new(self)
+        models.storage.new(self)
 
     def __str__(self):
         """Str method"""
