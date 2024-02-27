@@ -15,11 +15,10 @@ class TestStringMethods(unittest.TestCase):
 
     def test_save(self):
         instance = BaseModel()
-
-        old_updated_at = instance.updated_at
         instance.save()
-        new_updated_at = instance.updated_at
-        self.assertNotEqual(old_updated_at, new_updated_at)
+        obj = "BaseModel." + instance.id
+        with open("file.json", "r") as my_file:
+            self.assertIn(obj, my_file.read())
 
     def test_dict(self):
         model = BaseModel()
