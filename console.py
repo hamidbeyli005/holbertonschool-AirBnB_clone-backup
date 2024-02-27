@@ -42,6 +42,7 @@ class HBNBCommand(cmd.Cmd):
             print(instance.id)
 
     def do_show(self, arg):
+        """Show method"""
         command = arg.split()
         if len(command) == 0:
             print("** class name missing **")
@@ -58,6 +59,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
 
     def do_destroy(self, arg):
+        """Destroy method"""
         command = arg.split()
         if len(command) == 0:
             print("** class name missing **")
@@ -75,6 +77,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
 
     def do_all(self, arg):
+        """Show all objects"""
         command = arg.split()
         objects = storage.all()
         if len(command) == 0:
@@ -88,6 +91,7 @@ class HBNBCommand(cmd.Cmd):
                     print(str(value))
 
     def do_update(self, arg):
+        """Update instance"""
         command = arg.split()
 
         if len(command) == 0:
