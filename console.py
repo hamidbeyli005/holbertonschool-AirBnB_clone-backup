@@ -93,15 +93,15 @@ class HBNBCommand(cmd.Cmd):
 
         if len(command) == 0:
             print("** class name missing **")
-        elif command[0] not in self.__classes:
+        if command[0] not in self.__classes:
             print("** class doesn't exist **")
-        elif len(command) == 1:
+        if len(command) == 1:
             print("** instance id missing **")
-        elif key not in objects:
+        if key not in objects:
             print("** no instance found **")
-        elif len(command) == 2:
+        if len(command) == 2:
             print("** attribute name missing **")
-        elif len(command) == 3:
+        if len(command) == 3:
             print("** value missing ** ")
         else:
             obj = objects[key]
