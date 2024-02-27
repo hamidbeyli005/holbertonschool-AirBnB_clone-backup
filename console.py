@@ -11,6 +11,7 @@ class HBNBCommand(cmd.Cmd):
 
     prompt = "(hbnb) "
     __classes = ["BaseModel"]
+
     def do_quit(self, arg):
         """Quit command to exit the program"""
         return True
@@ -39,7 +40,7 @@ class HBNBCommand(cmd.Cmd):
             instance = BaseModel()
             instance.save()
             print(instance.id)
-    
+
     def do_show(self, arg):
         command = arg.split()
         if len(command) == 0:
@@ -72,7 +73,7 @@ class HBNBCommand(cmd.Cmd):
                 storage.save()
             else:
                 print("** no instance found **")
-    
+
     def do_all(self, arg):
         command = arg.split()
         objects = storage.all()
@@ -88,26 +89,28 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, arg):
         command = arg.split()
-        objects = storage.all()
-        key = f"{command[0]}.{command[1]}"
 
         if len(command) == 0:
             print("** class name missing **")
-        if command[0] not in self.__classes:
+        elif command[0] not in self.__classes:
             print("** class doesn't exist **")
-        if len(command) == 1:
+        elif len(command) == 1:
             print("** instance id missing **")
-        if key not in objects:
-            print("** no instance found **")
-        if len(command) == 2:
-            print("** attribute name missing **")
-        if len(command) == 3:
-            print("** value missing ** ")
         else:
-            obj = objects[key]
-            setattr(obj, command[2], command[3])
-            obj.save()
+            objects = storage.all()
+            key = f"{command[0]}.{command[1]}"
+
+            if key not in objects:
+                print("** no instance found **")
+            elif len(command) == 2:
+                print("** attribute name missing **")
+            elif len(command) == 3:
+                print("** value missing ** ")
+            else:
+                obj = objects[key]
+                setattr(obj, command[2], command[3])
+                obj.save()
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
-
