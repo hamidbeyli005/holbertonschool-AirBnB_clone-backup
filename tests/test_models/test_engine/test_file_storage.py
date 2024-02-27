@@ -3,6 +3,7 @@
 
 import unittest
 import os
+import json
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 
@@ -28,8 +29,13 @@ class TestFileStorage(unittest.TestCase):
     def test_save(self):
         self.storage.new(self.model)
         self.storage.save()
-        self.assertTrue(os.path.exists(FileStorage._FileStorage__file_path))
 
+        self.assertTrue(os.path.exists(FileStorage._FileStorage__file_path))
+        
+        with open(FileStorage._FileStorage__file_path, 'r') as my_file:
+            objs = json.load(my_file)
+        self.assertIn(f"BaseModel.{self.model.id}", objs)
+    
     def test_reload(self):
         self.storage.new(self.model)
         self.storage.save()
