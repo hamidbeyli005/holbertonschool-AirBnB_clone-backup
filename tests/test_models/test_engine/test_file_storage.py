@@ -25,7 +25,8 @@ class TestFileStorage(unittest.TestCase):
         self.storage.new(self.model)
         self.assertEqual(len(self.storage.all()), 1)
 
-    def test_save(self): 
+    def test_save(self):
+        self.storage.new(self.model)
         self.storage.save()
         self.assertTrue(os.path.exists(FileStorage._FileStorage__file_path))
 
