@@ -103,7 +103,7 @@ class HBNBCommand(cmd.Cmd):
         elif len(command) == 2:
             print("** attribute name missing **")
         elif len(command) == 3:
-            print("** value missing ** ")
+            print("** value missing **")
         else:
             objects = storage.all()
             key = f"{command[0]}.{command[1]}"
