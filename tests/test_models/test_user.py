@@ -16,16 +16,10 @@ class TestUserModel(unittest.TestCase):
         storage.__objects = {}
 
     def test_type(self):
-        user = User()
-        user.email = "test@example.com"
-        user.password = "password123"
-        user.first_name = "Hamid"
-        user.last_name = "Hamidbayli"
-
-        self.assertIsInstance(user.email, str)
-        self.assertIsInstance(user.password, str)
-        self.assertIsInstance(user.first_name, str)
-        self.assertIsInstance(user.last_name, str)
+        self.assertIsInstance(User.email, str)
+        self.assertIsInstance(User.password, str)
+        self.assertIsInstance(User.first_name, str)
+        self.assertIsInstance(User.last_name, str)
 
     def test_email(self):
         user = User()
