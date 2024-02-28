@@ -38,4 +38,4 @@ class TestFileStorage(unittest.TestCase):
         models.storage.save()
         models.storage.reload()
         objs = FileStorage._FileStorage__objects
-        self.assertIn("BaseModel." + base_model.id, objs)
+        self.assertEqual(self.storage.all(), objs)
