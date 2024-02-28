@@ -70,7 +70,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             objects = storage.all()
             key = f"{command[0]}.{command[1]}"
-            if key in objects:
+            if key in objects.keys():
                 del objects[key]
                 storage.save()
             else:
