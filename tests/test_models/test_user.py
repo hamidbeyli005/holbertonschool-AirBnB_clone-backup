@@ -27,8 +27,14 @@ class TestUserModel(unittest.TestCase):
         self.assertIsInstance(self.user.first_name, str)
         self.assertIsInstance(self.user.last_name, str)
 
-    def test_user_attributes(self):
+    def test_email(self):
         self.assertEqual(self.user.email, "test@example.com")
+
+    def test_password(self):
         self.assertEqual(self.user.password, "password123")
+
+    def test_first_name(self):
         self.assertEqual(self.user.first_name, "Hamid")
+
+    def test_last_name(self):
         self.assertEqual(self.user.last_name, "Hamidbayli")
