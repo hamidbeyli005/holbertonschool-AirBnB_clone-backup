@@ -15,26 +15,34 @@ class TestUserModel(unittest.TestCase):
             os.remove("file.json")
         storage.__objects = {}
 
-        self.user = User()
-        self.user.email = "test@example.com"
-        self.user.password = "password123"
-        self.user.first_name = "Hamid"
-        self.user.last_name = "Hamidbayli"
-
     def test_type(self):
-        self.assertIsInstance(self.user.email, str)
-        self.assertIsInstance(self.user.password, str)
-        self.assertIsInstance(self.user.first_name, str)
-        self.assertIsInstance(self.user.last_name, str)
+        user = User()
+        user.email = "test@example.com"
+        user.password = "password123"
+        user.first_name = "Hamid"
+        user.last_name = "Hamidbayli"
+
+        self.assertIsInstance(user.email, str)
+        self.assertIsInstance(user.password, str)
+        self.assertIsInstance(user.first_name, str)
+        self.assertIsInstance(user.last_name, str)
 
     def test_email(self):
-        self.assertEqual(self.user.email, "test@example.com")
+        user = User()
+        user.email = "test@example.com"
+        self.assertEqual(user.email, "test@example.com")
 
     def test_password(self):
-        self.assertEqual(self.user.password, "password123")
+        user = User()
+        user.password = "password123"
+        self.assertEqual(user.password, "password123")
 
     def test_first_name(self):
-        self.assertEqual(self.user.first_name, "Hamid")
+        user = User()
+        user.first_name = "Hamid"
+        self.assertEqual(user.first_name, "Hamid")
 
     def test_last_name(self):
-        self.assertEqual(self.user.last_name, "Hamidbayli")
+        user = User()
+        user.last_name = "Hamidbayli"
+        self.assertEqual(user.last_name, "Hamidbayli")
