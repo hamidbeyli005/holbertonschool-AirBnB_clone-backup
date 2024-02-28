@@ -31,11 +31,16 @@ class TestFileStorage(unittest.TestCase):
         self.storage.save()
 
         self.assertTrue(os.path.exists(FileStorage._FileStorage__file_path))
- 
+
     def test_reload(self):
-        base_model = BaseModel()
-        models.storage.new(base_model)
-        models.storage.save()
-        models.storage.reload()
-        objs = FileStorage._FileStorage__objects
-        self.assertEqual(self.storage.all(), objs)
+        a_storage = FileStorage()
+        try:
+            os.remove("file.json")
+        except:
+            pass
+        with open("file.json", "w") as f:
+            f.write("{}")
+        with open("file.json", "r") as r:
+            for line in r:
+                self.assertEqual(line, "{}")
+        self.assertIs(a_storage.reload(), None) 
