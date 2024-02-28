@@ -95,30 +95,38 @@ class HBNBCommand(cmd.Cmd):
                 if key.split(".")[0] == command[0]:
                     print(str(value))
 
-    def do_update(self, arg):
-        """Update instance"""
-        command = arg.split()
-
-        if len(command) == 0:
+    def do_update(self, argument):
+        """Updates an instance based on the class name and id """
+        tokensU = shlex.split(argument)
+        if len(tokensU) == 0:
             print("** class name missing **")
-        elif command[0] not in self.__classes:
-            print("** class doesn't exist **")
-        elif len(command) == 1:
+            return
+        elif len(tokensU) == 1:
             print("** instance id missing **")
-        elif len(command) == 2:
+            return
+        elif len(tokensU) == 2:
             print("** attribute name missing **")
-        elif len(command) == 3:
+            return
+        elif len(tokensU) == 3:
             print("** value missing **")
-        else:
-            objects = storage.all()
-            key = f"{command[0]}.{command[1]}"
-
-            if key not in objects:
-                print("** no instance found **")
-            else:
-                obj = objects[key]
-                setattr(obj, command[2], command[3])
-                obj.save()
+            return
+        elif tokensU[0] not in self.classes:
+            print("** class doesn't exist **")
+            return
+        keyI = tokensU[0] + "." + tokensU[1]
+        dicI = models.storage.all()
+        try:
+            instanceU = dicI[keyI]
+        except KeyError:
+            print("** no instance found **")
+            return
+        try:
+            typeA = type(getattr(instanceU, tokensU[2]))
+            tokensU[3] = typeA(tokensU[3])
+        except AttributeError:
+            pass
+        setattr(instanceU, tokensU[2], tokensU[3])
+        models.storage.save()
 
 
 if __name__ == '__main__':
